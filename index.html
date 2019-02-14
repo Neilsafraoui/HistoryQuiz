@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Quiz d'Histoire</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- STYLE -->
+            <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700|Raleway:300,400,500,600,700" rel="stylesheet">
+            <!-- NORMALIZE -->
+            <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" />
+            <!-- FONT AWESOME -->
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+            <!-- MAIN MOBILE STYLE -->
+            <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+            <!-- MAIN DESKTOP STYLE -->
+            <link rel="stylesheet" media='screen and (min-width: 960px)' href="css/style_desktop.css"/>
+        <!-- VUE.JS -->
+            <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    </head>
+    <body>
+        <div id="app" class="master-container">
+            <div class="main-container">
+                <!-- CHOOSE PERIOD -->
+                <transition name="fade" mode="out-in">
+                <div class="choose-period-container" v-if="frameState == 0">
+                    <!-- TITLE AND PARAGRAPH -->
+                    <h1 class="main-title semi-bold"> Quiz d'Histoire </h1>
+                    <hr class="main-hr">
+                    <p class="main-paragraph"> Choisissez une période </p>
+                    <!-- PERIOD BUTTONS -->
+                    <div class="periods-container">
+                        <div v-for="period in periods" class="periods"  
+                        :style="{ 'background-image': 'url(img/' + period.imgn + '-bg.jpg)' }"  @click="SetPeriod(period)" :class="period.name">
+                            <div class="bg-image-wrapper">
+                                <p class="period-name semi-bold raleway">{{ period.name }}</p>
+                                <p class="period-date regular cabin">{{ period.date }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </transition>
+                <!-- CHOOSE THEME -->
+                <transition name="fade" mode="out-in">
+                <div class="choose-theme-container" v-if="frameState == 1">
+                    <div class="header-container">
+                        <i class="fas fa-chevron-left fa-2x" @click="BackPeriod()"></i>
+                        <h1 class="main-title semi-bold"> {{ period.name }} </h1>
+                        <i class="fas fa-chevron-right fa-2x vhidden"></i>
+                    </div>
+                    <hr class="main-hr">
+                    <!-- TITLE -->
+                    <p class="main-paragraph"> Choisissez un thème </p>
+                    <!-- THEME BUTTONS -->
+                    <div class="themes-container">
+                        <div v-for="theme in themes" class="themes"
+                        :style="{ 'background-image': 'url(img/' + theme.imgn + '-bg.jpg)' }" @click="SetTheme(theme)">
+                            <div class="bg-image-wrapper">
+                                <p class="theme-name semi-bold raleway">{{ theme.name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </transition>
+                <!-- QUESTIONS SET -->
+                <transition name="fade" mode="out-in">
+                <div class="questions-container" v-if="frameState == 2">
+                    <div class="questions-header">
+                        <h1 class="questions-main-theme semi-bold"> {{ theme.name }} </h1>
+                        <h3 class="questions-main-period regular"> ({{period.name}}) </h3>
+                        <hr class="main-hr">
+                    </div>
+                    <p class="questions-main-paragraph medium"> {{ questionSet[questionsState].q }} </p>
+                    <p class="questions-counts"> Question {{ (questionsState + 1) }} sur {{ questionSet.length }}</p>
+                    <!-- ANSWERS BUTTONS -->
+                    <div class="answers-container">
+                        <div class="answer regular cabin" :class="{'selected': selectedAnswer == resp}" v-for="resp in questionSet[questionsState].responses" @click="SelectAnswer(resp)">
+                            <p class="answer-name">{{ resp.r }}</p>
+                        </div>
+                    </div>
+                    <button class="validate-answer-button" v-if="selectedAnswer != null" @click="AddResponse()">Valider</button>
+                </div>
+                </transition>
+                <!-- RESULTS SET -->
+                <transition name="fade" mode="out-in">
+                <div class="results-container" v-if="frameState == 3">
+                    <div class="questions-header">
+                        <h1 class="questions-main-theme semi-bold"> {{ theme.name }} </h1>
+                        <h3 class="questions-main-period regular"> ({{period.name}}) </h3>
+                        <hr class="main-hr">
+                    </div>
+                    <!-- <hr class="results-hr"> -->
+                    <!-- YOUR SCORE -->
+                    <div class="your-score-container">
+                        <h4 class="your-score-title regular">Votre Score</h4>
+                        <p class="right-answers-nb cabin regular">        <span class="right-answers-figures semi-bold">{{ GoodAnswersNb }}</span> <span class="right-answers-label">bonne(s) réponse(s) sur </span><span class="right-answers-figures semi-bold">{{ questionSet.length }}</span> 
+                        </p>
+                    </div>
+                    <!-- ANSWERS DETAILS -->
+                    <div class="answers-details-container"> 
+                        <h4 class="answer-details-title regular">Détails des réponses</h4>
+                        <div class="answer-details-wrapper" v-for="(question, index) in questionSet">
+                            <p class="answer-details-element-question cabin medium">{{index+1}}. {{ question.q }}</p>
+                            <span class="answer-details-element-response cabin medium"> {{GetRightAnswerFromQuestion(question)}} </span>
+                            <hr class="answers-hr">
+                        </div>
+                    </div>
+                    <button class="back-to-home cabin regular" @click="ReturnHome()">Retour à l'accueil</button>
+                </div>
+                </transition>
+            </div>
+        </div>
+        <script src="js/main.js"></script>
+    </body>
+</html>

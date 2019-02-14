@@ -1,0 +1,452 @@
+/*** FONTS & GENERIC ***/
+/* FONTS */
+p, span, button, input {
+    font-family: 'Cabin', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway', sans-serif;
+}
+
+/* GENERIC */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 14px;
+}
+
+input, button {
+    outline: none;
+}
+
+.master-container {
+    height: 100%;
+}
+
+/***** MAINS *****/
+
+.main-container {
+    min-height: 100%;
+    text-align: center;
+    /* background-color: #ECE7E2; */
+    background-color: #F3F3F3;
+}
+
+.main-title {
+    font-size: 2.2em;
+    color: #667E87;
+    margin: 0;
+    padding: 5% 0;
+}
+
+.main-paragraph {
+    font-size: 1.6em;
+    color: #826767;
+}
+
+.main-hr, .main-questions-hr, .results-hr {
+    color: #DED7D1;
+    background-color: #DED7D1;
+    border: none;
+    height: 1px;
+    width: 33%;
+}
+
+.main-hr, .answers-hr {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*** CONTAINERS ***/
+
+/* changed height 100% */
+.choose-period-container, .choose-theme-container, .questions-container, .results-container {
+    min-height: 100vh;
+    background-color: #F3F3F3;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.header-container i {
+    /* position: absolute; */
+    color: #667E87;
+}
+
+.header-container i:hover {
+    /* position: absolute; */
+    cursor: pointer;
+}
+
+/***** PERIODS & THEMES SELECT PAGE *****/
+
+.periods-container, .themes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.periods, .themes {
+    position: relative;
+    height: 140px;
+    width: 340px;
+
+    /* Background image is centered vertically and horizontally at all times */
+    background-position: center center;
+  
+    /* Background image doesn't tile */
+    background-repeat: no-repeat;
+  
+    /* This is what makes the background image rescale based
+     on the container's size */
+    background-size: cover;
+    
+    /* Prevent text from cover */
+    z-index: 1;
+    
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    background-color: #677F88;
+    margin-bottom: 5%;
+    /* border: none; */
+    border: 2px solid #DED7D1;
+    color: #DED7D1;
+    transition: border-color .33s;
+}
+
+.periods::before, .themes::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    top: 0; bottom: 0;
+    z-index: -1;
+    border-radius: 6px;
+}
+
+.periods::before {
+    background: rgba(103, 127, 136, .7);
+}
+
+.themes::before {
+    background: rgba(183, 175, 156, .7);
+}
+
+.periods:hover, .themes:hover {
+    cursor: pointer;
+    border-color: #aba9a8;
+}
+
+.bg-image-wrapper {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); 
+}
+
+.period-name, .theme-name {
+    margin: 0 0 1% 0;
+    font-size: 2.2em;
+    color: #E2E7EB;
+}
+
+.period-date {
+    margin: 0;
+    font-size: 1.5em;
+    color: #E2D4C4;
+}
+
+
+/* Desactive la période ancien régime pour l'instant */
+.Ancien {
+    pointer-events: none;
+
+  /* for "disabled" effect */
+  opacity: 0.5;
+  background: #CCC;
+}
+
+.Ancien .period-name {
+    text-decoration: line-through;
+}
+
+/***** QUESTIONS & ANSWERS *****/
+
+/*** QUESTIONS ***/
+
+.questions-main-theme {
+    margin: 0;
+    padding: 5% 0 1% 0;
+    font-size: 2.2em;
+    color: #667E87;
+}
+
+.questions-main-period {
+    margin: 0 0 1% 0;
+    font-size: 1.7em;
+    color: #667E87;
+}
+
+.questions-main-paragraph {
+    font-size: 1.3em;
+    width: 80%;
+    margin: 5% auto 3% auto;
+    color: #826767;
+}
+
+/*** ANSWERS ***/
+
+.answer {
+    width: 300px;
+    font-size: 1.2em;
+    color: #818181;
+    background-color: rgba(214, 207, 205, .5);
+    border-radius: 6px;
+    margin: 0 auto 5% auto;
+    padding: 5%;
+    transition: background-color .33s;
+}
+
+.answer:hover {
+    cursor: pointer;
+    background-color: rgba(214, 207, 205, .7);
+}
+
+.answer-name {
+    margin: 0;
+}
+
+.main-questions-hr {
+    margin: 1% auto 10% auto;
+}
+
+.questions-counts {
+    font-size: 1.2em;
+    color: #A8ADAF;
+    font-weight: 300;
+}
+
+.validate-answer-button {
+    border: none;
+    background: none;
+    width: 300px;
+    background-color: #8AB186;
+    color: #E2E7EB;
+    border-radius: 6px;
+    font-size: 1.4em;
+    padding: 2% 0;
+    transition: background-color .33s;
+}
+
+.validate-answer-button:hover {
+    cursor: pointer;
+    background-color: rgb(113, 151, 109);
+}
+
+/***** RESULTS *****/
+
+.results-title {
+    background-color: #636069;
+    color: #DED7D1;
+}
+
+.results-period {
+    font-size: 2em;
+}
+
+.right-answers-nb {
+    color: #667E87;
+    margin: 0;    
+}
+
+.your-score-container, .answers-details-container {
+    width: 100%;
+    padding: 3% 3%;
+}
+
+.your-score-container {
+    background-color: #EFEAE2;
+    margin-top: 5%;
+    border-bottom: 1px solid #bba6a1;
+    border-top: 1px solid #bba6a1;
+}
+
+.answers-details-container {
+    background-color: #E0E7F1;
+}
+
+.your-score-title, .answer-details-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #826767;
+    font-size: 2em;
+}
+
+.right-answers-figures {
+    font-size: 2em;
+}
+
+.right-answers-label {
+    font-size: 1.6em;
+    padding: 0px 2%;
+}
+
+.answer-details-element-question, .answer-details-element-response {
+    color: #667E87;
+}
+
+.answer-details-element-question {
+    width: 100%;
+    font-size: 1.1em;
+    padding: 1%;
+}
+
+.answer-details-element-response {
+    font-size: 1.2em;
+    background-color: #d0d0de;
+    color: #45455d;
+    padding: 1% 3%;
+    border-radius: 6px;
+}
+
+.back-to-home {
+    background: none;
+    border: none;
+    background-color: rgba(214, 207, 205, 0.25);
+    color: #A6AEB0;
+    padding: 2% 10%;
+    font-size: 1.2em;
+    border-radius: 6px;
+    margin: 2% 0;
+    transition: background-color .33s;
+}
+
+.back-to-home:hover {
+    cursor: pointer;
+    background-color: rgba(214, 207, 205, 0.4);
+}
+
+.answers-hr {
+    color: #B7BAC0;
+    background-color: #B7BAC0;
+    border: none;
+    height: 1px;
+    margin-top: 5%;
+}
+
+/***** ANIMATIONS & TRANSITIONS *****/
+
+.fade-enter-active, .fade-leave-active {
+    transition-property: opacity;
+    transition-duration: .25s;
+  }
+  
+  .fade-enter-active {
+    transition-delay: .25s;
+  }
+  
+  .fade-enter, .fade-leave-active {
+    opacity: 0
+  }
+  
+/* test pour les answers */
+
+
+.test-transition {
+    transition: all .3s ease;
+    height: 30px;
+    padding: 10px;
+    background-color: #eee;
+    overflow: hidden;
+  }
+  .test-enter, .test-leave {
+    height: 0;
+    padding: 0 10px;
+    opacity: 0;
+  }
+
+/*** UTILS ***/
+
+.regular {font-weight: 400;}
+.medium {font-weight: 500;}
+.semi-bold {font-weight: 600;}
+.bold {font-weight: bold;}
+.raleway {font-family: 'Raleway', sans-serif;}
+.cabin {font-family: 'Cabin', sans-serif;}
+
+.selected { border: 1px solid rgba(103, 127, 136, .6);}
+.vhidden { visibility: hidden;}
+
+/*** OLD ***/
+
+/* .periods {
+    height: 80px;
+    font-weight: 500;
+    color: #DED7D1;
+    /* font-size: 1.8em; */
+/*} */
+
+/* .themes {
+    background-color: #586471;
+    height: 60px;
+} */
+
+
+/* .see-answers-details {
+    width: 300px;
+    height: 60px;
+    background-color: #A8ADAF;
+    color: #403539;
+    font-size: 1.6em;
+    border: none;
+    font-weight: 600;
+} */
+
+/* .your-score-container, .answers-details-container {
+    width: 300px;
+    margin: 1% auto 3% auto;
+    /* font-size: 1.6em;
+    border-radius: 6px;
+    padding: 3% 3%;
+} */
+
+
+/* .right-answers-nb, .see-answers-details {
+    font-family: 'Raleway', sans-serif;
+}
+ */
+/* .right-answers-nb {
+    width: 100%;
+    /*height: 80px;*/
+    /* background-color: #DBC8AB;
+    color: #636069;
+    font-weight: 600;
+    font-size: 2em;
+    padding: 5% 0;
+} */
+
+
+/*.answers-container {
+     height: 400px;
+    background-color: #E4DACB;
+}*/
+
+/* .answer:first-child{
+    border-top: 1px solid #DBBAB3;
+} */
+
+
+/* .questions-header {
+    background-color: #AE625B;
+    color: #DED7D1;
+    padding: 2% 0 2% 0;
+} */
