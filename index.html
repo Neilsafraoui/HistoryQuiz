@@ -102,7 +102,17 @@
                         <h4 class="answer-details-title regular">Détails des réponses</h4>
                         <div class="answer-details-wrapper" v-for="(question, index) in questionSet">
                             <p class="answer-details-element-question cabin medium">{{index+1}}. {{ question.q }}</p>
-                            <span class="answer-details-element-response cabin medium"> {{GetRightAnswerFromQuestion(question)}} </span>
+                            <!-- REPONSE OK -->
+                            <div class="answer-ok" v-if="IsRightAnswer(index) == 1">
+                                <p class="answer-ok-p"><span class="your-answer">Votre réponse : </span><span class="given-answer-ok">{{ givenAnswers[index].r }}</span><i class="fas fa-check fa-lg"></i></p>
+                            </div>
+                            <!-- REPONSE KO -->
+                            <div class="answer-ko" v-else-if="IsRightAnswer(index) == 0">
+                                <p class="answer-ko-p"><span class="your-answer">Votre réponse : </span><span class="given-answer-ko">{{ givenAnswers[index].r }}</span>
+                                    <!-- <i class="fas fa-times"></i> -->
+                                </p>
+                                <span class="answer-details-element-response cabin medium"> {{GetRightAnswerFromQuestion(question)}} </span>
+                            </div>
                             <hr class="answers-hr">
                         </div>
                     </div>

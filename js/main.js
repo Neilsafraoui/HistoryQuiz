@@ -186,8 +186,6 @@ var jsonData =
     ]
 }
 
-
-
 var vm = new Vue({
     el: '#app',
     data: {
@@ -310,6 +308,13 @@ var vm = new Vue({
         BackPeriod(){
             this.frameState--;
             this.period = { name: '', id: 0}
+        },
+        IsRightAnswer(index) {
+            if(this.givenAnswers[index].ia == 1){
+                return 1
+            }else {
+                return 0
+            }
         }
     },
     computed: {
