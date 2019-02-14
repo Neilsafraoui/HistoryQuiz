@@ -70,8 +70,9 @@
                         <h3 class="questions-main-period regular"> ({{period.name}}) </h3>
                         <hr class="main-hr">
                     </div>
-                    <p class="questions-main-paragraph medium"> {{ questionSet[questionsState].q }} </p>
-                    <p class="questions-counts"> Question {{ (questionsState + 1) }} sur {{ questionSet.length }}</p>
+                    <p class="questions-main-paragraph medium"> {{ questionSet[questionsState].q }} 
+                       <span class="questions-counts"> ({{ (questionsState + 1) }} sur {{ questionSet.length }})</span>
+                    <!-- <p class="questions-counts"> Question {{ (questionsState + 1) }} sur {{ questionSet.length }}</p> -->
                     <!-- ANSWERS BUTTONS -->
                     <div class="answers-container">
                         <div class="answer regular cabin" :class="{'selected': selectedAnswer == resp}" v-for="resp in questionSet[questionsState].responses" @click="SelectAnswer(resp)">
